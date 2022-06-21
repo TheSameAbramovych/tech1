@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Table(name = "author")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,5 +17,10 @@ public class User {
     private String name;
     private int age;
     @OneToMany
+    @JoinTable(
+            name = "author_articles",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "articles_id")
+    )
     private Set<Article> articles;
 }

@@ -1,0 +1,30 @@
+insert into author(id,name,age) values (1,'Joe',21);
+insert into author(id,name,age) values (2,'Greg',22);
+insert into author(id,name,age) values (3,'Drake',21);
+insert into author(id,name,age) values (4,'Ron',18);
+insert into author(id,name,age) values (5,'Bred',25);
+insert into author(id,name,age) values (6,'Jon',20);
+
+insert into article(id,text,color,author_id) values (1,'Hi there','black',1);
+insert into article(id,text,color,author_id) values (2,'Hi there','red',1);
+insert into article(id,text,color,author_id) values (3,'Hi there','yellow',1);
+insert into article(id,text,color,author_id) values (4,'Hi there','black',1);
+insert into article(id,text,color,author_id) values (5,'Hi there','yellow',2);
+insert into article(id,text,color,author_id) values (6,'Hi there','white',3);
+insert into article(id,text,color,author_id) values (7,'Hi there','black',4);
+insert into article(id,text,color,author_id) values (8,'Hi there','blue',5);
+insert into article(id,text,color,author_id) values (9,'Hi there','black',6);
+insert into article(id,text,color,author_id) values (10,'Hi there','blue',6);
+insert into article(id,text,color,author_id) values (11,'Hi there','black',6);
+
+insert into author_articles(author_id,articles_id) values (1,1);
+insert into author_articles(author_id,articles_id) values (1,2);
+insert into author_articles(author_id,articles_id) values (1,3);
+insert into author_articles(author_id,articles_id) values (1,4);
+insert into author_articles(author_id,articles_id) values (2,5);
+insert into author_articles(author_id,articles_id) values (3,6);
+insert into author_articles(author_id,articles_id) values (4,7);
+insert into author_articles(author_id,articles_id) values (5,8);
+insert into author_articles(author_id,articles_id) values (6,9);
+insert into author_articles(author_id,articles_id) values (6,10);
+insert into author_articles(author_id,articles_id) values (6,11);

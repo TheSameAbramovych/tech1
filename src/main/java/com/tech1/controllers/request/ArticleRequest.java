@@ -1,7 +1,6 @@
 package com.tech1.controllers.request;
 
 import com.tech1.entity.Color;
-import com.tech1.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

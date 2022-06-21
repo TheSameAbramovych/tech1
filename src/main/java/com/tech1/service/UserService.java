@@ -1,8 +1,10 @@
 package com.tech1.service;
 
+import com.tech1.controllers.request.UserRequest;
 import com.tech1.entity.Article;
 import com.tech1.entity.Color;
 import com.tech1.entity.User;
+import com.tech1.exception.NotFoundUserException;
 import com.tech1.repository.ArticleRepo;
 import com.tech1.repository.UserRepo;
 import lombok.AllArgsConstructor;
@@ -35,16 +37,23 @@ public class UserService {
                 .filter(user -> user.getArticles().size() >= 3).map(User::getName).collect(Collectors.toList());
     }
 
-    public List<User> getAllUser(){
+    public List<User> getAllUser() {
         return userRepo.findAll();
     }
 
-    public User findByUserId(long id){
-       return userRepo.findById(id).orElse(null);
+    public User findByUserId(long id) {
+        User user = userRepo.findById(id).orElse(null);
+        if (user == null) {
+            throw new NotFoundUserException(id);
+        }
+        return user;
     }
 
-    public void createUser(User user){
-        userRepo.save(user);
+    public User createUser(UserRequest request) {
+        User user = new User();
+        user.setAge(request.getAge());
+        user.setName(request.getName());
+        return userRepo.save(user);
     }
 
 }

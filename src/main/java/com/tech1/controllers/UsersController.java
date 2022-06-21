@@ -21,23 +21,22 @@ public class UsersController {
     }
 
     @GetMapping(params = "age")
-    public List<User> getUserByAge(@RequestParam int age){
+    public List<User> getUserByAge(@RequestParam int age) {
         return userService.getUserByAge(age);
     }
+
     @GetMapping("/unique")
-    public List<String> getUniqueName(){
+    public List<String> getUniqueName() {
         return userService.getUniqueUserName();
     }
+
     @GetMapping
-    public List<User> getAllUser(){
+    public List<User> getAllUser() {
         return userService.getAllUser();
     }
 
     @PostMapping("/create")
-    public  void createUser(@RequestBody UserRequest request){
-        User user = new User();
-        user.setAge(request.getAge());
-        user.setName(request.getName());
-        userService.createUser(user);
+    public User createUser(@RequestBody UserRequest request) {
+        return userService.createUser(request);
     }
 }

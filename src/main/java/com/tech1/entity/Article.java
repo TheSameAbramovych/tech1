@@ -17,7 +17,7 @@ public class Article {
     @Enumerated(EnumType.STRING)
     private Color color;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "author_id")
     @JsonBackReference
     private User user;
 

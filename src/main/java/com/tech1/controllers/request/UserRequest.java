@@ -6,6 +6,6 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class UserRequest {
-    private  final String name;
+    private final String name;
     private final int age;
 }
