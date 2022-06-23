@@ -2,10 +2,13 @@ package com.tech1.controllers.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRequest {
-    private final String name;
-    private final int age;
+    private String name;
+    private int age;
 }
+

@@ -2,23 +2,30 @@ package com.tech1.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
+@SuperBuilder
+@NoArgsConstructor
 public class Article {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String text;
+
     @Enumerated(EnumType.STRING)
     private Color color;
+
     @ManyToOne
-    @JoinColumn(name = "author_id")
     @JsonBackReference
+    @JoinColumn(name = "author_id")
     private User user;
 
 }
+

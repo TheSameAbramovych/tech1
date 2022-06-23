@@ -10,7 +10,6 @@ import com.tech1.repository.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,20 +20,19 @@ public class UserService {
     private final ArticleRepo articleRepo;
 
     public List<User> getUserByAge(int age) {
-        List<User> users = userRepo.findAll();
-        return users.stream().filter(user -> user.getAge() >= age).collect(Collectors.toList());
+        return userRepo.findAllByAgeGreaterThanEqual(age);
     }
 
     public List<User> getUserByColor(Color color) {
-        List<Article> articles = articleRepo.findAllByColor(color);
-        List<User> users = new ArrayList<>();
-        articles.forEach(article -> users.add(article.getUser()));
-        return users;
+//        return userRepo.findAllByArticles_Color(color); // It is better?
+        return articleRepo.findAllByColor(color).stream()
+                .map(Article::getUser)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     public List<String> getUniqueUserName() {
-        return userRepo.findAll().stream()
-                .filter(user -> user.getArticles().size() >= 3).map(User::getName).collect(Collectors.toList());
+        return userRepo.findAllDistinctNamesWithArticlesMoreThen(3);
     }
 
     public List<User> getAllUser() {
@@ -42,18 +40,15 @@ public class UserService {
     }
 
     public User findByUserId(long id) {
-        User user = userRepo.findById(id).orElse(null);
-        if (user == null) {
-            throw new NotFoundUserException(id);
-        }
-        return user;
+        return userRepo.findById(id)
+                .orElseThrow(() -> new NotFoundUserException(id));
     }
 
     public User createUser(UserRequest request) {
-        User user = new User();
-        user.setAge(request.getAge());
-        user.setName(request.getName());
+        User user = User.builder()
+                .name(request.getName())
+                .age(request.getAge())
+                .build();
         return userRepo.save(user);
     }
-
 }

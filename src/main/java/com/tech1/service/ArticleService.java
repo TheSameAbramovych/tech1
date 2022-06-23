@@ -2,6 +2,7 @@ package com.tech1.service;
 
 import com.tech1.controllers.request.ArticleRequest;
 import com.tech1.entity.Article;
+import com.tech1.entity.User;
 import com.tech1.repository.ArticleRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,12 @@ public class ArticleService {
     }
 
     public Article createArticle(ArticleRequest request) {
-        Article article = new Article();
-        article.setUser(userService.findByUserId(request.getUserId()));
-        article.setColor(request.getColor());
-        article.setText(request.getText());
+        User user = userService.findByUserId(request.getUserId());
+        Article article = Article.builder()
+                .user(user)
+                .color(request.getColor())
+                .text(request.getText())
+                .build();
         return articleRepo.save(article);
     }
 }
